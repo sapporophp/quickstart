@@ -27,7 +27,10 @@
 Route::group(['middleware' => ['web']], function () {
     //
     Route::get('/', function () {
-        return view('task');
+        $tasks = App\Task::orderBy('created_at', 'asc')->get();
+        return view('task', [
+            'tasks' => $tasks
+        ]);
     });
 
     Route::post('/task', function (\Illuminate\Http\Request $request) {
@@ -39,6 +42,9 @@ Route::group(['middleware' => ['web']], function () {
                 ->withInput()
                 ->withErrors($validator);
         }
+        App\Task::create($request->all());
+
+        return redirect('/');
     });
 });
 
