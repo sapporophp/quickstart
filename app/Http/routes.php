@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('task');
-});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +26,34 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+    Route::get('/', function () {
+        return view('task');
+    });
+
+    Route::post('/task', function (\Illuminate\Http\Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255'
+        ]);
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withInput()
+                ->withErrors($validator);
+        }
+    });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
