@@ -62,7 +62,9 @@
                             </td>
 
                             <td>
-                                <a href="task/{{ $task->id }}" data-method="delete">Delete</a>
+                                @can('destroy', $task)
+                                    <a href="task/{{ $task->id }}" data-method="delete">Delete</a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

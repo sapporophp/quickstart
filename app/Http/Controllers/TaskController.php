@@ -32,12 +32,13 @@ class TaskController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect('/');
+        return redirect('tasks');
     }
 
     public function destroy(Task $task)
     {
+        $this->authorize('destroy', $task);
         $task->delete();
-        return redirect('/');
+        return redirect('tasks');
     }
 }
