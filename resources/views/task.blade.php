@@ -58,10 +58,11 @@
                             <!-- タスク名 -->
                             <td class="table-text">
                                 <div>{{ $task->name }}</div>
+                                {{ $task->user_id }}
                             </td>
 
                             <td>
-                                <!-- TODO: 削除ボタン -->
+                                <a href="task/{{ $task->id }}" data-method="delete">Delete</a>
                             </td>
                         </tr>
                     @endforeach
